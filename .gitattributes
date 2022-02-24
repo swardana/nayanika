@@ -1,0 +1,133 @@
+# Auto detect
+##   Handle line endings automatically for files detected as
+##   text and leave all files detected as binary untouched.
+##   This will handle all files NOT defined below.
+*               text=auto
+
+# Java sources
+*.java          text diff=java
+*.gradle        text diff=java
+*.gradle.kts    text diff=java
+
+# These files are text and should be normalized (Convert crlf => lf)
+*.bash          text eol=lf
+*.bat           text eol=crlf
+*.cmd           text eol=crlf
+*.css           text diff=css
+*.df            text
+*.fxml          text
+*.htm           text diff=html
+*.html          text diff=html
+*.js            text
+*.json          text
+*.jsp           text
+*.jspf          text
+*.jspx          text
+*.properties    text
+*.tld           text
+*.tag           text
+*.tagx          text
+*.xml           text
+*.xhtml         text diff=html
+
+# Documentation
+*.markdown      text
+*.md            text
+*.mdwn          text
+*.mdown         text
+*.mkd           text
+*.mkdn          text
+*.mdtxt         text
+*.mdtext        text
+*.txt           text
+AUTHORS         text
+CHANGELOG       text
+CHANGES         text
+CONTRIBUTING    text
+COPYING         text
+copyright       text
+*COPYRIGHT*     text
+INSTALL         text
+license         text
+LICENSE         text
+NEWS            text
+readme          text
+*README*        text
+TODO            text
+
+# Configs
+*.cnf           text
+*.conf          text
+*.config        text
+.editorconfig   text
+.env            text
+.gitattributes  text
+.gitconfig      text
+*.toml          text
+*.yaml          text
+*.yml           text
+browserslist    text
+Makefile        text
+makefile        text
+
+# Graphics
+*.ai            binary
+*.bmp           binary
+*.eps           binary
+*.gif           binary
+*.gifv          binary
+*.ico           binary
+*.jng           binary
+*.jp2           binary
+*.jpg           binary
+*.jpeg          binary
+*.jpx           binary
+*.jxr           binary
+*.pdf           binary
+*.png           binary
+*.psb           binary
+*.psd           binary
+# SVG treated as an asset (binary) by default.
+*.svg           text
+# If you want to treat it as binary,
+# use the following line instead.
+# *.svg           binary
+*.svgz          binary
+*.tif           binary
+*.tiff          binary
+*.wbmp          binary
+*.webp          binary
+
+# Archives
+*.7z            binary
+*.gz            binary
+*.jar           binary
+*.rar           binary
+*.tar           binary
+*.zip           binary
+
+# Fonts
+*.ttf           binary
+*.eot           binary
+*.otf           binary
+*.woff          binary
+*.woff2         binary
+
+# Executables
+*.exe           binary
+*.pyc           binary
+
+# RC files (like .babelrc or .eslintrc)
+*.*rc           text
+
+# Ignore files (like .npmignore or .gitignore)
+*.*ignore       text
+
+# These files are binary and should be left untouched
+# (binary is a macro for -text -diff)
+*.class         binary
+*.dll           binary
+*.ear           binary
+*.jar           binary
+*.so            binary
+*.war           binary

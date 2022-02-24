@@ -1,0 +1,57 @@
+# Java class files
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Virtual machine crash logs
+hs_err_pid*
+
+# Eclipse
+.settings
+.metadata
+.project
+.classpath
+.buildpath
+Servers
+bin
+
+# Netbeans
+nbproject/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Intellij IDEA
+*.iml
+*.iws
+*.ipr
+.idea/
+
+# Maven
+MavenWrapperDownloader.java
+target
+
+# Java Flight Recorder
+*.jfr
+
+# Log
+*.log
+
+# Gradle
+.gradle
+build
+#Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# General
+.DS_Store
+.java-version
