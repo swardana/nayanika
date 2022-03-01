@@ -551,6 +551,7 @@
                                             <excludes>
                                                 <exclude>*Test</exclude>
                                                 <exclude>*IT</exclude>
+                                                <exclude>com.swardana.nayanika.*Nayanika*</exclude>
                                             </excludes>
                                             <limits>
                                                 <limit>
