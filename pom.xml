@@ -57,6 +57,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
 
+        <!-- For maven-exec-plugin> -->
+        <app.module>com.swardana.nayanika</app.module>
+        <app.launcher>com.swardana.nayanika.NayanikaLauncher</app.launcher>
+
         <!-- Apache Maven & Plugins -->
         <maven.version>3.8.4</maven.version>
         <!-- Core plugins -->
@@ -76,6 +80,7 @@
         <!-- Tools plugins -->
         <maven.dependency.version>3.1.2</maven.dependency.version>
         <maven.enforcer.version>3.0.0-M1</maven.enforcer.version>
+        <maven.exec.version>3.0.0</maven.exec.version>
 
         <!-- test dependencies -->
         <junit.jupiter.version>5.8.0</junit.jupiter.version>
@@ -295,6 +300,21 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${maven.exec.version}</version>
+                <configuration>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-Djava.util.logging.config.file=src/main/resources/logging-dev.properties</argument>
+                        <argument>--module-path</argument>
+                        <modulepath/>
+                        <argument>--module</argument>
+                        <argument>${app.module}/${app.launcher}</argument>
+                    </arguments>
+                </configuration>
             </plugin>
         </plugins>
     </build>
