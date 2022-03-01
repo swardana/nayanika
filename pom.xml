@@ -145,6 +145,9 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
+                <excludes>
+                    <exclude>logging-dev.properties</exclude>
+                </excludes>
             </resource>
         </resources>
         <plugins>
