@@ -577,6 +577,7 @@
                                                 <exclude>*IT</exclude>
                                                 <exclude>com.swardana.nayanika.*Nayanika*</exclude>
                                                 <exclude>com.swardana.nayanika.base.FallbackExceptionHandler</exclude>
+                                                <exclude>com.swardana.nayanika.base.NayanikaExecutorService</exclude>
                                             </excludes>
                                             <limits>
                                                 <limit>
