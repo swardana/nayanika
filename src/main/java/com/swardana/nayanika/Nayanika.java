@@ -19,6 +19,7 @@
 package com.swardana.nayanika;
 
 import com.swardana.nayanika.base.FallbackExceptionHandler;
+import com.swardana.nayanika.base.NayanikaExecutorService;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -43,6 +44,8 @@ public class Nayanika extends Application {
 
     private static final Logger LOG = Logger.getLogger(Nayanika.class.getName());
 
+    private final NayanikaExecutorService nes = new NayanikaExecutorService();
+
     @Override
     public void init() throws Exception {
         Thread.setDefaultUncaughtExceptionHandler(new FallbackExceptionHandler());
@@ -54,6 +57,11 @@ public class Nayanika extends Application {
         var scene = new Scene(new StackPane(lbl), 680, 400);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        this.nes.gracefullyShutDown();
     }
 
     /**
