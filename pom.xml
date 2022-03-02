@@ -576,6 +576,7 @@
                                                 <exclude>*Test</exclude>
                                                 <exclude>*IT</exclude>
                                                 <exclude>com.swardana.nayanika.*Nayanika*</exclude>
+                                                <exclude>com.swardana.nayanika.base.FallbackExceptionHandler</exclude>
                                             </excludes>
                                             <limits>
                                                 <limit>
