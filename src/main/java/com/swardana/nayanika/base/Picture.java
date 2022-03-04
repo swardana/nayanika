@@ -18,6 +18,9 @@
 
 package com.swardana.nayanika.base;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -42,5 +45,52 @@ public interface Picture {
      * @return {@link InputStream} of the picture input byte stream.
      */
     InputStream stream();
+
+    /**
+     * A picture with static data.
+     *
+     * @author Sukma Wardana
+     * @version 1.0.0
+     * @since 1.0.0
+     */
+    class Of implements Picture {
+
+        private final String name;
+        private final InputStream stream;
+
+        /**
+         * Creates new Picture::Of.
+         *
+         * @param name the picture name.
+         * @param src the picture source file data.
+         * @throws IOException if the picture source file data is not
+         * found.
+         */
+        public Of(final String name, final File src) throws IOException {
+            this(name, new FileInputStream(src));
+        }
+
+        /**
+         * Creates new Picture::Of.
+         *
+         * @param name the picture name.
+         * @param stream the picture byte stream data.
+         */
+        public Of(final String name, final InputStream stream) {
+            this.name = name;
+            this.stream = stream;
+        }
+
+        @Override
+        public final String name() {
+            return this.name;
+        }
+
+        @Override
+        public final InputStream stream() {
+            return this.stream;
+        }
+
+    }
 
 }
