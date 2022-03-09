@@ -18,8 +18,14 @@
 
 package com.swardana.nayanika.base;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Source location of the pictures.
@@ -100,5 +106,80 @@ public interface PictureSource {
      * @return {@link List} of pictures.
      */
     List<Picture> pictures();
+
+    /**
+     * A directory which contain the pictures.
+     * <p>
+     *     Looking for {@link Supported} pictures
+     *     within directory.
+     * </p>
+     *
+     * @author Sukma Wardana
+     * @version 1.0.0
+     * @since 1.0.0
+     */
+    class Directory implements PictureSource {
+
+        private static final Logger LOG = Logger.getLogger(Directory.class.getName());
+
+        private final Path source;
+        private final Supported supported;
+
+        /**
+         * Creates new Directory.
+         * <p>
+         *     Search all available {@link Supported} pictures within
+         *     directory.
+         * </p>
+         *
+         * @param src the {@link Path} of directory source.
+         */
+        public Directory(final Path src) {
+            this(src, Supported.ALL);
+        }
+
+        /**
+         * Creates new Directory.
+         *
+         * @param src the {@link Path} of directory source.
+         * @param filter the filtered {@link Supported} picture.
+         */
+        public Directory(final Path src, final Supported filter) {
+            this.source = src;
+            this.supported = filter;
+        }
+
+        @Override
+        public final List<Picture> pictures() {
+            var dir = this.source.toString();
+            final List<Picture> pictures = new ArrayList<>();
+            try (
+                var stream = Files.newDirectoryStream(
+                    this.source, this.supported.pattern()
+                )
+            ) {
+                LOG.log(
+                    Level.FINE,
+                    "Successfully streamed the directory. [dir={0}]",
+                    new Object[]{dir}
+                );
+                for (final var path : stream) {
+                    var picName = path.getFileName().toString();
+                    pictures.add(
+                        new Picture.Of(picName, path.toFile())
+                    );
+                    LOG.log(Level.FINE, "Add picture into list. [pic={0}]", new Object[]{picName});
+                }
+                LOG.log(
+                    Level.INFO,
+                    "Search pictures in directory. [dir={0}, size={1}]",
+                    new Object[]{dir, pictures.size()}
+                );
+                return pictures;
+            } catch (final IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
 
 }
