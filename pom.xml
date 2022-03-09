@@ -230,6 +230,7 @@
                     <argLine>
                         ${surefire.jacoco.args}
                         --add-opens com.swardana.nayanika/com.swardana.nayanika.base=ALL-UNNAMED
+                        --add-opens com.swardana.nayanika/com.swardana.nayanika.bg=ALL-UNNAMED
                     </argLine>
                 </configuration>
             </plugin>
