@@ -581,6 +581,8 @@
                                                 <exclude>com.swardana.nayanika.*Nayanika*</exclude>
                                                 <exclude>com.swardana.nayanika.base.FallbackExceptionHandler</exclude>
                                                 <exclude>com.swardana.nayanika.base.NayanikaExecutorService</exclude>
+                                                <exclude>com.swardana.nayanika.base.PictureImage</exclude>
+                                                <exclude>com.swardana.nayanika.gui.frame.FramePane*</exclude>
                                             </excludes>
                                             <limits>
                                                 <limit>
