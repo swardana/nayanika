@@ -229,6 +229,7 @@
                 <configuration>
                     <argLine>
                         ${surefire.jacoco.args}
+                        --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
                         --add-opens com.swardana.nayanika/com.swardana.nayanika.base=ALL-UNNAMED
                         --add-opens com.swardana.nayanika/com.swardana.nayanika.bg=ALL-UNNAMED
                         --add-opens com.swardana.nayanika/com.swardana.nayanika.gui=ALL-UNNAMED
