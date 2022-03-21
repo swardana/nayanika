@@ -55,13 +55,4 @@ public interface PicturesNavigation {
      */
     void beginning();
 
-    /**
-     * Jump to specific picture from the pictures.
-     *
-     * @param pic the new active picture.
-     * @throws IllegalArgumentException if the new picture is not part of
-     * this collection.
-     */
-    void jump(Picture pic);
-
 }

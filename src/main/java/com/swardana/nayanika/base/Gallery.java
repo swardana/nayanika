@@ -50,6 +50,8 @@ public interface Gallery {
      *
      * @param pictures the picture collection.
      * @param curr the current active picture.
+     * @throws IllegalArgumentException if the new picture is not part of
+     * this collection.
      */
     void exhibit(List<PictureImage> pictures, PictureImage curr);
 
