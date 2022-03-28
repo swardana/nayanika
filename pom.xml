@@ -235,6 +235,7 @@
                         --add-opens com.swardana.nayanika/com.swardana.nayanika.gui=ALL-UNNAMED
                         --add-opens com.swardana.nayanika/com.swardana.nayanika.gui.event=ALL-UNNAMED
                         --add-opens com.swardana.nayanika/com.swardana.nayanika.gui.frame=ALL-UNNAMED
+                        --add-opens com.swardana.nayanika/com.swardana.nayanika.gui.topbar=ALL-UNNAMED
                     </argLine>
                 </configuration>
             </plugin>
