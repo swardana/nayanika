@@ -56,6 +56,10 @@ public class Nayanika extends Application {
     public void start(final Stage stage) throws Exception {
         var view = new AppVisual(stage, nes);
         var scene = new Scene(view.parent(), 680, 400);
+        scene.addEventFilter(
+            KeyEvent.KEY_PRESSED,
+            new KeyboardPaginationEventHandler(view.parent())
+        );
         stage.setScene(scene);
         stage.show();
     }
