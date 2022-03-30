@@ -20,10 +20,11 @@ package com.swardana.nayanika;
 
 import com.swardana.nayanika.base.FallbackExceptionHandler;
 import com.swardana.nayanika.base.NayanikaExecutorService;
+import com.swardana.nayanika.gui.AppVisual;
+import com.swardana.nayanika.gui.event.KeyboardPaginationEventHandler;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.util.logging.Level;
@@ -53,8 +54,8 @@ public class Nayanika extends Application {
 
     @Override
     public void start(final Stage stage) throws Exception {
-        var lbl = new Label("Hello World");
-        var scene = new Scene(new StackPane(lbl), 680, 400);
+        var view = new AppVisual(stage, nes);
+        var scene = new Scene(view.parent(), 680, 400);
         stage.setScene(scene);
         stage.show();
     }
