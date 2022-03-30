@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0-M1] - 2022-03-30
 ### Added
 
 - Pictures navigation control (next, previous, beginning, and last) on menubar and toolbar.

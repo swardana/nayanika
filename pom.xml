@@ -22,7 +22,7 @@
 
     <groupId>com.swardana.nayanika</groupId>
     <artifactId>nayanika</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-M1</version>
 
     <packaging>jar</packaging>
 
