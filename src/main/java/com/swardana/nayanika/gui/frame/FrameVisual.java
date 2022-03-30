@@ -140,12 +140,14 @@ public final class FrameVisual extends PaginationStatusControl
         this.pictures = pics;
         this.index = 0;
         this.lastIdx = pics.size();
+        this.onChange();
     }
 
     @Override
     public void exhibit(final List<PictureImage> pics, final PictureImage curr) {
         this.exhibit(pics);
         this.jump(curr);
+        this.onChange();
     }
 
     @Override
@@ -296,6 +298,12 @@ public final class FrameVisual extends PaginationStatusControl
         double desiredV = this.pane.getVvalue() - deltaV;
 
         this.pane.setVvalue(Math.max(0, Math.min(this.pane.getVmax(), desiredV)));
+    }
+
+    @Override
+    public void onChange() {
+        super.onChange();
+        this.image.setImage(this.pictures.get(this.index()).image());
     }
 
     private void initGraphics() {
