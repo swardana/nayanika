@@ -6,3 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+### Added
+
+- Pictures navigation control (next, previous, beginning, and last) on menubar and toolbar.
+- Navigation between pictures using the keyboard right and up for next and left and down for previous.
+- Zoom and Pan on the picture.
+- Load all pictures from the local machine directory and view the given picture.
+- Load all pictures from the local machine directory and view the first picture.
+- Viewing a picture from the local machine.
