@@ -83,14 +83,14 @@
         <maven.exec.version>3.0.0</maven.exec.version>
 
         <!-- test dependencies -->
-        <junit.jupiter.version>5.8.0</junit.jupiter.version>
-        <junit.jupiter.params.version>5.8.0</junit.jupiter.params.version>
-        <assertj.version>3.21.0</assertj.version>
-        <mockito.version>4.0.0</mockito.version>
+        <junit.jupiter.version>5.8.2</junit.jupiter.version>
+        <junit.jupiter.params.version>5.8.2</junit.jupiter.params.version>
+        <assertj.version>3.22.0</assertj.version>
+        <mockito.version>4.4.0</mockito.version>
         <testfx.version>4.0.16-alpha</testfx.version>
 
         <!-- dependencies -->
-        <jfx.version>17.0.2</jfx.version>
+        <jfx.version>18</jfx.version>
     </properties>
 
     <dependencies>
