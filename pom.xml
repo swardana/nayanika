@@ -588,6 +588,7 @@
                                                 <exclude>com.swardana.nayanika.base.PictureImage</exclude>
                                                 <exclude>com.swardana.nayanika.gui.**Visual**</exclude>
                                                 <exclude>com.swardana.nayanika.gui.**View**</exclude>
+                                                <exclude>com.swardana.nayanika.event.KeyboardPaginationEventHandler*</exclude>
                                                 <exclude>com.swardana.nayanika.gui.frame.FramePane*</exclude>
                                             </excludes>
                                             <limits>

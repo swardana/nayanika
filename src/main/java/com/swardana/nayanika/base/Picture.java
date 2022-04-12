@@ -18,10 +18,11 @@
 
 package com.swardana.nayanika.base;
 
+import javafx.scene.image.Image;
+
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.nio.file.Path;
 
 /**
  * A picture.
@@ -40,11 +41,11 @@ public interface Picture {
     String name();
 
     /**
-     * Byte stream of this picture.
+     * Converting this picture to {@link Image}.
      *
-     * @return {@link InputStream} of the picture input byte stream.
+     * @return {@link Image} of the picture input.
      */
-    InputStream stream();
+    Image image();
 
     /**
      * A picture with static data.
@@ -56,7 +57,7 @@ public interface Picture {
     class Of implements Picture {
 
         private final String name;
-        private final InputStream stream;
+        private final Image image;
 
         /**
          * Creates new Picture::Of.
@@ -67,18 +68,30 @@ public interface Picture {
          * found.
          */
         public Of(final String name, final File src) throws IOException {
-            this(name, new FileInputStream(src));
+            this(name, new Image(src.toURI().toURL().toExternalForm(), true));
         }
 
         /**
          * Creates new Picture::Of.
          *
          * @param name the picture name.
-         * @param stream the picture byte stream data.
+         * @param src the picture source path data.
+         * @throws IOException if the picture source file data is not
+         * found.
          */
-        public Of(final String name, final InputStream stream) {
+        public Of(final String name, final Path src) throws IOException {
+            this(name, new Image(src.toUri().toURL().toExternalForm(), true));
+        }
+
+        /**
+         * Creates new Picture::Of.
+         *
+         * @param name the picture name.
+         * @param img the picture {@link Image} .
+         */
+        public Of(final String name, final Image img) {
             this.name = name;
-            this.stream = stream;
+            this.image = img;
         }
 
         @Override
@@ -87,8 +100,8 @@ public interface Picture {
         }
 
         @Override
-        public final InputStream stream() {
-            return this.stream;
+        public final Image image() {
+            return this.image;
         }
 
     }

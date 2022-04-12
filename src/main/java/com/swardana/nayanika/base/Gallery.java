@@ -38,7 +38,7 @@ public interface Gallery {
      *
      * @param pictures the picture collection.
      */
-    void exhibit(List<PictureImage> pictures);
+    void exhibit(List<Picture> pictures);
 
     /**
      * An exhibition of picture gallery.
@@ -53,6 +53,6 @@ public interface Gallery {
      * @throws IllegalArgumentException if the new picture is not part of
      * this collection.
      */
-    void exhibit(List<PictureImage> pictures, PictureImage curr);
+    void exhibit(List<Picture> pictures, Picture curr);
 
 }

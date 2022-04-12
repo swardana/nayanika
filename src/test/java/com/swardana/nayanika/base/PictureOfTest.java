@@ -18,10 +18,11 @@
 
 package com.swardana.nayanika.base;
 
+import javafx.scene.image.Image;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.io.InputStream;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.framework.junit5.ApplicationExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -33,15 +34,16 @@ import static org.mockito.Mockito.mock;
  * @version 1.0.0
  * @since 1.0.0
  */
+@ExtendWith(ApplicationExtension.class)
 class PictureOfTest {
 
     @Test
     @DisplayName("verify create picture from byte stream data")
     public void testVerifyCreatePictureFromStream() {
-        var mockStream = mock(InputStream.class);
-        var pic = new Picture.Of("1.jpg", mockStream);
+        var mockImage = mock(Image.class);
+        var pic = new Picture.Of("1.jpg", mockImage);
         assertThat(pic.name()).isEqualTo("1.jpg");
-        assertThat(pic.stream()).isNotNull();
+        assertThat(pic.image()).isNotNull();
     }
 
 }

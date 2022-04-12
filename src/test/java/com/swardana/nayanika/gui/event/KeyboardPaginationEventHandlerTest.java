@@ -40,13 +40,15 @@ import org.testfx.framework.junit5.Start;
 @ExtendWith(ApplicationExtension.class)
 class KeyboardPaginationEventHandlerTest {
 
+    private StackPane parent = new StackPane();
+    private KeyboardPaginationEventHandler event = new KeyboardPaginationEventHandler(parent);
+
     @Start
     private void start(final Stage stage) {
-        var parent = new StackPane();
         var scene = new Scene(parent, 100, 100);
         scene.addEventFilter(
             KeyEvent.KEY_PRESSED,
-            new KeyboardPaginationEventHandler(parent)
+            event
         );
         stage.setScene(scene);
         stage.show();

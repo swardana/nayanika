@@ -20,7 +20,7 @@ package com.swardana.nayanika.gui.frame;
 
 import com.swardana.nayanika.base.Gallery;
 import com.swardana.nayanika.base.PaginationStatusControl;
-import com.swardana.nayanika.base.PictureImage;
+import com.swardana.nayanika.base.Picture;
 import com.swardana.nayanika.base.PicturesNavigation;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -56,7 +56,7 @@ public final class FrameVisual extends PaginationStatusControl
 
     private final FrameBehavior behavior;
 
-    private List<PictureImage> pictures;
+    private List<Picture> pictures;
     private int lastIdx;
     private int index;
 
@@ -136,7 +136,7 @@ public final class FrameVisual extends PaginationStatusControl
     }
 
     @Override
-    public void exhibit(final List<PictureImage> pics) {
+    public void exhibit(final List<Picture> pics) {
         this.pictures = pics;
         this.index = 0;
         this.lastIdx = pics.size();
@@ -144,7 +144,7 @@ public final class FrameVisual extends PaginationStatusControl
     }
 
     @Override
-    public void exhibit(final List<PictureImage> pics, final PictureImage curr) {
+    public void exhibit(final List<Picture> pics, final Picture curr) {
         this.exhibit(pics);
         this.jump(curr);
         this.onChange();
@@ -327,7 +327,7 @@ public final class FrameVisual extends PaginationStatusControl
         this.content.setOnMouseDragged(mouseDraggedAction);
     }
 
-    private void jump(final PictureImage pic) {
+    private void jump(final Picture pic) {
         boolean isFound = false;
         for (int i=0; i <= this.lastIdx; i++) {
             if (pic.name().equals(this.pictures.get(i).name())) {

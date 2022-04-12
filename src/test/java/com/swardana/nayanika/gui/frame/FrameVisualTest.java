@@ -19,7 +19,6 @@
 package com.swardana.nayanika.gui.frame;
 
 import com.swardana.nayanika.base.Picture;
-import com.swardana.nayanika.base.PictureImage;
 import com.swardana.nayanika.base.PictureSource;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -31,7 +30,6 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -48,13 +46,12 @@ class FrameVisualTest {
     private static final String FOLDER = "src/test/resources"
         + "/com/swardana/nayanika/base";
 
-    private static List<PictureImage> pictures;
+    private static List<Picture> pictures;
 
     @BeforeAll
     public static void setup() {
         var path = Paths.get(FOLDER);
-        pictures = new PictureSource.Directory(path).pictures()
-            .stream().map(PictureImage::new).collect(Collectors.toList());
+        pictures = new PictureSource.Directory(path).pictures();
     }
 
     @AfterAll
@@ -78,11 +75,7 @@ class FrameVisualTest {
     public void testVerifyExhibitPictureGalleryWithActivePicture() throws IOException {
         var path = Paths.get(FOLDER);
         var imgPath = Paths.get(path.toString(), "tattoo-wolf-jpg.jpg");
-        var active = new PictureImage(
-            new Picture.Of(
-                "tattoo-wolf-jpg.jpg", imgPath.toFile()
-            )
-        );
+        var active = new Picture.Of("tattoo-wolf-jpg.jpg", imgPath.toFile());
         var visual = new FrameVisual();
         visual.exhibit(pictures, active);
         assertThat(visual.size()).isEqualTo(4);

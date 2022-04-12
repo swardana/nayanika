@@ -18,26 +18,23 @@
 
 package com.swardana.nayanika.bg;
 
-import com.swardana.nayanika.base.PictureImage;
+import com.swardana.nayanika.base.Picture;
 import com.swardana.nayanika.base.PictureSource;
 import javafx.concurrent.Task;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * A storage.
  * <p>
- *     Place where the pictures reside. Automatically
- *     convert from {@link com.swardana.nayanika.base.Picture}
- *     to {@link PictureImage}.
+ *     Place where the pictures reside.
  * </p>
  *
  * @author Sukma Wardana
  * @version 1.0.0
  * @since 1.0.0
  */
-public class Storage extends Task<List<PictureImage>> {
+public class Storage extends Task<List<Picture>> {
 
     private final PictureSource source;
 
@@ -51,9 +48,7 @@ public class Storage extends Task<List<PictureImage>> {
     }
 
     @Override
-    protected final List<PictureImage> call() throws Exception {
-        return this.source.pictures().stream()
-            .map(PictureImage::new)
-            .collect(Collectors.toList());
+    protected final List<Picture> call() throws Exception {
+        return this.source.pictures();
     }
 }

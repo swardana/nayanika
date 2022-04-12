@@ -20,7 +20,6 @@ package com.swardana.nayanika.gui;
 
 import com.swardana.nayanika.base.NayanikaExecutorService;
 import com.swardana.nayanika.base.Picture;
-import com.swardana.nayanika.base.PictureImage;
 import com.swardana.nayanika.base.PictureSource;
 import com.swardana.nayanika.bg.Storage;
 import com.swardana.nayanika.gui.event.ExhibitionEvent;
@@ -98,7 +97,7 @@ public class AppVisual extends BorderPane implements AppView {
                             new PictureSource.Directory(src.toPath().getParent())
                         );
                         storage.setOnSucceeded(
-                            ev -> frame.exhibit(storage.getValue(), new PictureImage(pic))
+                            ev -> frame.exhibit(storage.getValue(), pic)
                         );
                     }
                     nes.cachedExecutor().execute(storage);

@@ -166,7 +166,7 @@ public interface PictureSource {
                 for (final var path : stream) {
                     var picName = path.getFileName().toString();
                     pictures.add(
-                        new Picture.Of(picName, path.toFile())
+                        new Picture.Of(picName, path)
                     );
                     LOG.log(Level.FINE, "Add picture into list. [pic={0}]", new Object[]{picName});
                 }
