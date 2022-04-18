@@ -20,6 +20,8 @@ package com.swardana.nayanika.base;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.framework.junit5.ApplicationExtension;
 
 import java.nio.file.Paths;
 
@@ -32,6 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @version 1.0.0
  * @since 1.0.0
  */
+@ExtendWith(ApplicationExtension.class)
 class PictureSourceDirectoryTest {
 
     private static final String FOLDER = "src/test/resources"

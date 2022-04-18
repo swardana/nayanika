@@ -68,7 +68,7 @@ public interface Picture {
          * found.
          */
         public Of(final String name, final File src) throws IOException {
-            this(name, new Image(src.toURI().toURL().toExternalForm(), true));
+            this(name, new Image(src.toURI().toURL().toExternalForm()));
         }
 
         /**
@@ -80,7 +80,7 @@ public interface Picture {
          * found.
          */
         public Of(final String name, final Path src) throws IOException {
-            this(name, new Image(src.toUri().toURL().toExternalForm(), true));
+            this(name, new Image(src.toUri().toURL().toExternalForm()));
         }
 
         /**

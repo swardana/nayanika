@@ -20,8 +20,8 @@ package com.swardana.nayanika.gui.frame;
 
 import com.swardana.nayanika.base.Picture;
 import com.swardana.nayanika.base.PictureSource;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -48,14 +48,14 @@ class FrameVisualTest {
 
     private static List<Picture> pictures;
 
-    @BeforeAll
-    public static void setup() {
+    @BeforeEach
+    public void setup() {
         var path = Paths.get(FOLDER);
         pictures = new PictureSource.Directory(path).pictures();
     }
 
-    @AfterAll
-    public static void tearDown() {
+    @AfterEach
+    public void tearDown() {
         pictures = null;
     }
 
@@ -74,8 +74,8 @@ class FrameVisualTest {
     @DisplayName("verify exhibit picture gallery with active picture")
     public void testVerifyExhibitPictureGalleryWithActivePicture() throws IOException {
         var path = Paths.get(FOLDER);
-        var imgPath = Paths.get(path.toString(), "tattoo-wolf-jpg.jpg");
-        var active = new Picture.Of("tattoo-wolf-jpg.jpg", imgPath.toFile());
+        var imgPath = Paths.get(path.toString(), "tattoo-dragon-png.png");
+        var active = new Picture.Of("tattoo-dragon-png.png", imgPath.toFile());
         var visual = new FrameVisual();
         visual.exhibit(pictures, active);
         assertThat(visual.size()).isEqualTo(4);
