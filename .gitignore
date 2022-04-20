@@ -36,6 +36,10 @@ nb-configuration.xml
 *.ipr
 .idea/
 
+# Visual Stode Code
+.vscode/
+.code-workspace
+
 # Maven
 MavenWrapperDownloader.java
 target
