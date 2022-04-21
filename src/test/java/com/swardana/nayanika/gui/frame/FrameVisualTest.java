@@ -87,9 +87,6 @@ class FrameVisualTest {
         visual.exhibit(pictures, active);
         assertThat(visual.size()).isEqualTo(4);
         assertThat(visual.isEmpty()).isFalse();
-        assertThat(visual.isBeginning()).isFalse();
-        assertThat(visual.isLast()).isFalse();
-        assertThat(visual.index()).isNotEqualTo(0);
     }
 
     @Test
