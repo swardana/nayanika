@@ -30,8 +30,7 @@ import javafx.scene.image.Image;
  */
 public final class PictureImage {
 
-    private final String name;
-    private final Image img;
+    private final Picture picture;
 
     /**
      * Creates new PictureImage.
@@ -39,8 +38,7 @@ public final class PictureImage {
      * @param pic the {@link Picture} that will convert to {@link Image}.
      */
     public PictureImage(final Picture pic) {
-        this.name = pic.name();
-        this.img = new Image(pic.stream());
+        this.picture = pic;
     }
 
     /**
@@ -49,7 +47,7 @@ public final class PictureImage {
      * @return {@link String} of this picture name.
      */
     public String name() {
-        return this.name;
+        return this.picture.name();
     }
 
     /**
@@ -58,7 +56,7 @@ public final class PictureImage {
      * @return {@link Image} of this picture.
      */
     public Image image() {
-        return this.img;
+        return new Image(this.picture.stream());
     }
 
 }

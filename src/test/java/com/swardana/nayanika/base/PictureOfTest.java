@@ -21,7 +21,8 @@ package com.swardana.nayanika.base;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.InputStream;
+import java.io.File;
+import java.nio.file.Path;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -36,12 +37,19 @@ import static org.mockito.Mockito.mock;
 class PictureOfTest {
 
     @Test
-    @DisplayName("verify create picture from byte stream data")
-    public void testVerifyCreatePictureFromStream() {
-        var mockStream = mock(InputStream.class);
-        var pic = new Picture.Of("1.jpg", mockStream);
+    @DisplayName("verify create picture from file")
+    public void testVerifyCreatePictureFromFile() {
+        var mockFile = mock(File.class);
+        var pic = new Picture.Of("1.jpg", mockFile);
         assertThat(pic.name()).isEqualTo("1.jpg");
-        assertThat(pic.stream()).isNotNull();
+    }
+
+    @Test
+    @DisplayName("verify create picture from path")
+    public void testVerifyCreatePictureFromPath() {
+        var mockPath = mock(Path.class);
+        var pic = new Picture.Of("1.jpg", mockPath);
+        assertThat(pic.name()).isEqualTo("1.jpg");
     }
 
 }

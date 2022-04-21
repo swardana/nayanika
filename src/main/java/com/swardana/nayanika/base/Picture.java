@@ -20,8 +20,10 @@ package com.swardana.nayanika.base;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
 
 /**
  * A picture.
@@ -43,6 +45,7 @@ public interface Picture {
      * Byte stream of this picture.
      *
      * @return {@link InputStream} of the picture input byte stream.
+     * @throws RuntimeException if fail to read the picture byt data stream.
      */
     InputStream stream();
 
@@ -56,7 +59,17 @@ public interface Picture {
     class Of implements Picture {
 
         private final String name;
-        private final InputStream stream;
+        private final File file;
+
+        /**
+         * Creates new Picture::Of.
+         *
+         * @param name the picture name.
+         * @param src the picture source path data.
+         */
+        public Of(final String name, final Path src) {
+            this(name, src.toFile());
+        }
 
         /**
          * Creates new Picture::Of.
@@ -66,20 +79,11 @@ public interface Picture {
          * @throws IOException if the picture source file data is not
          * found.
          */
-        public Of(final String name, final File src) throws IOException {
-            this(name, new FileInputStream(src));
+        public Of(final String name, final File src) {
+            this.name = name;
+            this.file = src;
         }
 
-        /**
-         * Creates new Picture::Of.
-         *
-         * @param name the picture name.
-         * @param stream the picture byte stream data.
-         */
-        public Of(final String name, final InputStream stream) {
-            this.name = name;
-            this.stream = stream;
-        }
 
         @Override
         public final String name() {
@@ -88,7 +92,11 @@ public interface Picture {
 
         @Override
         public final InputStream stream() {
-            return this.stream;
+            try {
+                return new FileInputStream(this.file);
+            } catch (final FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         }
 
     }

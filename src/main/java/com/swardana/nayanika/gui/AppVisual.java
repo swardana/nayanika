@@ -34,7 +34,6 @@ import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.nio.file.Files;
 
 /**
@@ -89,11 +88,7 @@ public class AppVisual extends BorderPane implements AppView {
                         storage.setOnSucceeded(ev -> frame.exhibit(storage.getValue()));
                     } else {
                         final Picture pic;
-                        try {
-                            pic = new Picture.Of(path.getFileName().toString(), src);
-                        } catch (final IOException ex) {
-                            throw new RuntimeException(ex);
-                        }
+                        pic = new Picture.Of(path.getFileName().toString(), src);
                         storage = new Storage(
                             new PictureSource.Directory(src.toPath().getParent())
                         );
