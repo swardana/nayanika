@@ -41,6 +41,8 @@ public class TopBarVisual extends VBox implements TopBarView {
     private final MenuView toolbar;
     private final MenuView menubar;
 
+    private final PaginationStatusControl control;
+
     /**
      * Creates new TopBarVisual.
      *
@@ -50,8 +52,10 @@ public class TopBarVisual extends VBox implements TopBarView {
     public TopBarVisual(final Stage stage, final PaginationStatusControl control) {
         this.toolbar = new ToolBarVisual(stage, control);
         this.menubar = new MenuBarVisual(stage, control);
+        this.control = control;
 
         this.initGraphics();
+        this.registerListeners();
     }
 
     @Override
@@ -84,6 +88,15 @@ public class TopBarVisual extends VBox implements TopBarView {
             this.menubar.parent(),
             this.toolbar.parent()
         );
+    }
+
+    private void registerListeners() {
+        this.control.emptyProperty().addListener(e -> {
+            if (!this.control.isEmpty()) {
+                this.menubar.enableSlideMenu();
+                this.toolbar.enableSlideMenu();
+            }
+        });
     }
 
 }
