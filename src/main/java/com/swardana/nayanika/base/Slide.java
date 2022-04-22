@@ -143,6 +143,7 @@ public interface Slide {
             this.timeline.getKeyFrames().addAll(keyFrame);
             this.timeline.setCycleCount(Timeline.INDEFINITE);
             this.timeline.play();
+            this.running.set(true);
         }
 
         @Override
@@ -156,6 +157,7 @@ public interface Slide {
             }
             this.timeline.stop();
             this.timeline.getKeyFrames().clear();
+            this.running.set(false);
         }
 
         @Override
