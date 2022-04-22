@@ -44,6 +44,8 @@ import java.io.File;
  */
 public class MenuBarVisual extends MenuBar implements MenuView {
 
+    private static final int SLIDE_MENU_INDEX = 0;
+
     private final Stage owner;
 
     // File Menu
@@ -58,6 +60,11 @@ public class MenuBarVisual extends MenuBar implements MenuView {
     private final MenuItem goPrev = new MenuItem();
     private final MenuItem goBeginning = new MenuItem();
     private final MenuItem goLast = new MenuItem();
+
+    // View Menu
+    private final Menu viewMenu = new Menu();
+    private final MenuItem startShow = new MenuItem();
+    private final MenuItem stopShow = new MenuItem();
 
     private final PaginationStatusControl pagination;
 
@@ -80,16 +87,36 @@ public class MenuBarVisual extends MenuBar implements MenuView {
         return this;
     }
 
+    @Override
+    public final void enableSlideMenu() {
+        this.startShow.setDisable(false);
+    }
+
+    @Override
+    public final void showStartSlideMenu() {
+        this.viewMenu.getItems().remove(SLIDE_MENU_INDEX);
+        this.viewMenu.getItems().add(SLIDE_MENU_INDEX, this.startShow);
+    }
+
+    @Override
+    public final void showStopSlideMenu() {
+        this.viewMenu.getItems().remove(SLIDE_MENU_INDEX);
+        this.viewMenu.getItems().add(SLIDE_MENU_INDEX, this.stopShow);
+    }
+
     private void initGraphics() {
         this.fileMenu.setText("_File");
         this.navigateMenu.setText("_Navigate");
+        this.viewMenu.setText("_View");
 
         this.initFileMenuGraphics();
         this.initNavigateMenuGraphics();
+        this.initViewMenuGraphics();
 
         this.getMenus().setAll(
             this.fileMenu,
-            this.navigateMenu
+            this.navigateMenu,
+            this.viewMenu
         );
     }
 
@@ -118,6 +145,14 @@ public class MenuBarVisual extends MenuBar implements MenuView {
             this.goBeginning,
             this.goLast
         );
+    }
+
+    private void initViewMenuGraphics() {
+        this.startShow.setText("Start slide-show");
+        this.startShow.setDisable(true);
+        this.stopShow.setText("Stop slide-show");
+
+        this.viewMenu.getItems().setAll(this.startShow);
     }
 
     private void registerListeners() {
@@ -171,4 +206,5 @@ public class MenuBarVisual extends MenuBar implements MenuView {
             )
         );
     }
+
 }

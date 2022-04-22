@@ -40,6 +40,8 @@ import java.io.File;
  */
 public class ToolBarVisual extends ToolBar implements MenuView {
 
+    private static final int SLIDE_MENU_INDEX = 1;
+
     private final Stage owner;
 
     private final Button openDirButton;
@@ -47,6 +49,8 @@ public class ToolBarVisual extends ToolBar implements MenuView {
     private final Button prevBtn;
     private final Button beginningBtn;
     private final Button lastBtn;
+    private final Button startBtn;
+    private final Button stopBtn;
 
     private final PaginationStatusControl pagination;
 
@@ -65,6 +69,8 @@ public class ToolBarVisual extends ToolBar implements MenuView {
         this.prevBtn = new Button();
         this.beginningBtn = new Button();
         this.lastBtn = new Button();
+        this.startBtn = new Button();
+        this.stopBtn = new Button();
 
         this.initGraphics();
         this.registerListeners();
@@ -75,8 +81,31 @@ public class ToolBarVisual extends ToolBar implements MenuView {
         return this;
     }
 
+
+
+    @Override
+    public final void enableSlideMenu() {
+        this.startBtn.setDisable(false);
+    }
+
+    @Override
+    public final void showStartSlideMenu() {
+        this.getItems().remove(SLIDE_MENU_INDEX);
+        this.getItems().add(SLIDE_MENU_INDEX, this.startBtn);
+    }
+
+    @Override
+    public final void showStopSlideMenu() {
+        this.getItems().remove(SLIDE_MENU_INDEX);
+        this.getItems().add(SLIDE_MENU_INDEX, this.stopBtn);
+    }
+
     private void initGraphics() {
         this.openDirButton.setText("Open...");
+
+        this.startBtn.setText("Start");
+        this.startBtn.setDisable(true);
+        this.stopBtn.setText("Stop");
 
         this.nextBtn.setText("Next");
         this.prevBtn.setText("Prev");
@@ -85,6 +114,7 @@ public class ToolBarVisual extends ToolBar implements MenuView {
 
         this.getItems().setAll(
             this.openDirButton,
+            this.startBtn,
             this.beginningBtn,
             this.prevBtn,
             this.nextBtn,
