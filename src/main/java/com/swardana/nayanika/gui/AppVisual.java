@@ -22,6 +22,7 @@ import com.swardana.nayanika.base.NayanikaExecutorService;
 import com.swardana.nayanika.base.Picture;
 import com.swardana.nayanika.base.PictureImage;
 import com.swardana.nayanika.base.PictureSource;
+import com.swardana.nayanika.base.Slide;
 import com.swardana.nayanika.bg.Storage;
 import com.swardana.nayanika.gui.event.ExhibitionEvent;
 import com.swardana.nayanika.gui.event.PaginationEvent;
@@ -51,14 +52,17 @@ public class AppVisual extends BorderPane implements AppView {
     private final TopBarView topbar;
     private final FrameVisual frame;
 
+    private final Slide slide;
+
     private final PaginationEventHandler paginationHandler;
     private final NayanikaExecutorService nes;
 
     public AppVisual(final Stage stage, final NayanikaExecutorService nes) {
         this.owner = stage;
         this.nes = nes;
+        this.slide = new Slide.Control();
         this.frame = new FrameVisual();
-        this.topbar = new TopBarVisual(stage, this.frame);
+        this.topbar = new TopBarVisual(stage, this.frame, this.slide);
 
         this.paginationHandler = new PaginationEventHandler(this.frame);
 
@@ -72,6 +76,7 @@ public class AppVisual extends BorderPane implements AppView {
     }
 
     private void initGraphics() {
+        this.slide.updateControl(this.frame);
         this.setTop(this.topbar.parent());
         this.setCenter(this.frame.parent());
     }

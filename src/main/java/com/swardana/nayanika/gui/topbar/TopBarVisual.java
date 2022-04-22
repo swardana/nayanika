@@ -19,6 +19,7 @@
 package com.swardana.nayanika.gui.topbar;
 
 import com.swardana.nayanika.base.PaginationStatusControl;
+import com.swardana.nayanika.base.Slide;
 import com.swardana.nayanika.gui.topbar.menu.MenuBarVisual;
 import com.swardana.nayanika.gui.topbar.menu.MenuView;
 import com.swardana.nayanika.gui.topbar.menu.ToolBarVisual;
@@ -48,10 +49,15 @@ public class TopBarVisual extends VBox implements TopBarView {
      *
      * @param stage the primary stage owner.
      * @param control the pagination observable status control.
+     * @param slide the slide-show observable state control.
      */
-    public TopBarVisual(final Stage stage, final PaginationStatusControl control) {
-        this.toolbar = new ToolBarVisual(stage, control);
-        this.menubar = new MenuBarVisual(stage, control);
+    public TopBarVisual(
+        final Stage stage,
+        final PaginationStatusControl control,
+        final Slide slide
+    ) {
+        this.toolbar = new ToolBarVisual(stage, control, slide);
+        this.menubar = new MenuBarVisual(stage, control, slide);
         this.control = control;
 
         this.initGraphics();

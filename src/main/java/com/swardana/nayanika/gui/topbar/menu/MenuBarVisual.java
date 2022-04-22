@@ -19,6 +19,7 @@
 package com.swardana.nayanika.gui.topbar.menu;
 
 import com.swardana.nayanika.base.PaginationStatusControl;
+import com.swardana.nayanika.base.Slide;
 import com.swardana.nayanika.gui.event.ExhibitionEvent;
 import com.swardana.nayanika.gui.event.PaginationEvent;
 import javafx.application.Platform;
@@ -73,8 +74,13 @@ public class MenuBarVisual extends MenuBar implements MenuView {
      *
      * @param stage the primary stage owner.
      * @param control the pagination observable status control.
+     * @param slide the slide-show observable state control.
      */
-    public MenuBarVisual(final Stage stage, final PaginationStatusControl control) {
+    public MenuBarVisual(
+        final Stage stage,
+        final PaginationStatusControl control,
+        final Slide slide
+    ) {
         this.owner = stage;
         this.pagination = control;
 
