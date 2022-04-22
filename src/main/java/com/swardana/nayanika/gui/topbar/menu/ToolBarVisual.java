@@ -55,6 +55,8 @@ public class ToolBarVisual extends ToolBar implements MenuView {
 
     private final PaginationStatusControl pagination;
 
+    private final MenuBehavior behavior;
+
     /**
      * Creates new ToolBarVisual.
      *
@@ -69,6 +71,8 @@ public class ToolBarVisual extends ToolBar implements MenuView {
     ) {
         this.owner = stage;
         this.pagination = control;
+
+        this.behavior = new MenuBehavior(this, slide);
 
         this.openDirButton = new Button();
         this.nextBtn = new Button();
@@ -139,6 +143,7 @@ public class ToolBarVisual extends ToolBar implements MenuView {
         });
 
         this.registerNavigateListeners();
+        this.registerViewListeners();
     }
 
     private void registerNavigateListeners() {
@@ -167,6 +172,11 @@ public class ToolBarVisual extends ToolBar implements MenuView {
                 new PaginationEvent(PaginationEvent.Movement.BEGINNING)
             )
         );
+    }
+
+    private void registerViewListeners() {
+        this.startBtn.setOnAction(e -> this.behavior.onStartSlideShow());
+        this.stopBtn.setOnAction(e -> this.behavior.onStopSlideShow());
     }
 
 }

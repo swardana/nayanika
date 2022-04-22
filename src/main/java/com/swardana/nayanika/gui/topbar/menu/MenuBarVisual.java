@@ -69,6 +69,8 @@ public class MenuBarVisual extends MenuBar implements MenuView {
 
     private final PaginationStatusControl pagination;
 
+    private final MenuBehavior behavior;
+
     /**
      * Creates new MenuBarVisual.
      *
@@ -83,6 +85,8 @@ public class MenuBarVisual extends MenuBar implements MenuView {
     ) {
         this.owner = stage;
         this.pagination = control;
+
+        this.behavior = new MenuBehavior(this, slide);
 
         this.initGraphics();
         this.registerListeners();
@@ -164,6 +168,7 @@ public class MenuBarVisual extends MenuBar implements MenuView {
     private void registerListeners() {
         this.registerFileMenuListeners();
         this.registerNavigateMenuListeners();
+        this.registerViewListeners();
     }
 
     private void registerFileMenuListeners() {
@@ -211,6 +216,11 @@ public class MenuBarVisual extends MenuBar implements MenuView {
                 new PaginationEvent(PaginationEvent.Movement.LAST)
             )
         );
+    }
+
+    private void registerViewListeners() {
+        this.startShow.setOnAction(e -> this.behavior.onStartSlideShow());
+        this.stopShow.setOnAction(e -> this.behavior.onStopSlideShow());
     }
 
 }
