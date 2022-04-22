@@ -37,6 +37,7 @@ public abstract class PaginationStatusControl implements PaginationStatus {
     private final IntegerProperty index;
     private final BooleanProperty beginning;
     private final BooleanProperty last;
+    private final BooleanProperty empty;
 
     /**
      * Creates new PaginationStatusControl.
@@ -45,6 +46,7 @@ public abstract class PaginationStatusControl implements PaginationStatus {
         this.index = new SimpleIntegerProperty(this, "index", 0);
         this.beginning = new SimpleBooleanProperty(this, "beginning", true);
         this.last = new SimpleBooleanProperty(this, "last", true);
+        this.empty = new SimpleBooleanProperty(this, "empty", true);
     }
 
     /**
@@ -75,6 +77,15 @@ public abstract class PaginationStatusControl implements PaginationStatus {
     }
 
     /**
+     * The observable condition to check whether pictures is exist or not.
+     *
+     * @return {@code true} if pictures is exists.
+     */
+    public final ReadOnlyBooleanProperty emptyProperty() {
+        return this.empty;
+    }
+
+    /**
      * An operation to update the observable state.
      * <p>
      *     Whenever there are indication that {@link PaginationStatus}
@@ -82,9 +93,18 @@ public abstract class PaginationStatusControl implements PaginationStatus {
      * </p>
      */
     public void onChange() {
-        this.index.setValue(this.index());
-        this.beginning.setValue(this.isBeginning());
-        this.last.setValue(this.isLast());
+        if (this.index.getValue() != this.index()) {
+            this.index.setValue(this.index());
+        }
+        if (this.beginning.getValue() != this.isBeginning()) {
+            this.beginning.setValue(this.isBeginning());
+        }
+        if (this.last.getValue() != this.isLast()) {
+            this.last.setValue(this.isLast());
+        }
+        if (this.empty.getValue() != this.isEmpty()) {
+            this.empty.setValue(this.isEmpty());
+        }
     }
 
 }
