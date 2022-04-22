@@ -2,6 +2,7 @@ package com.swardana.nayanika.gui.topbar.menu;
 
 import java.util.logging.Logger;
 
+import com.swardana.nayanika.base.Slide;
 import com.swardana.nayanika.gui.Behavior;
 
 /**
@@ -16,14 +17,19 @@ class MenuBehavior implements Behavior<MenuView> {
     private static final Logger LOG = Logger.getLogger(MenuBehavior.class.getName());
 
     private final MenuView view;
+    private final Slide slide;
 
     /**
      * Creates new MenuBehavior.
      *
      * @param view the menu view counterpart.
+     * @param slide the slide-show control state.
      */
-    MenuBehavior(final MenuView view) {
+    MenuBehavior(final MenuView view, final Slide slide) {
         this.view = view;
+        this.slide = slide;
+
+        this.registerListeners();
     }
 
     /**
@@ -34,7 +40,7 @@ class MenuBehavior implements Behavior<MenuView> {
      * </p>
      */
     final void onStartSlideShow() {
-        this.view().showStopSlideMenu();
+        this.slide.play();
     }
 
     /**
@@ -45,12 +51,22 @@ class MenuBehavior implements Behavior<MenuView> {
      * </p>
      */
     final void onStopSlideShow() {
-        this.view().showStartSlideMenu();
+        this.slide.stop();
     }
 
     @Override
     public final MenuView view() {
         return this.view;
+    }
+
+    private void registerListeners() {
+        this.slide.isRunningProperty().addListener(e -> {
+            if (this.slide.isRunningProperty().getValue()) {
+                this.view().showStopSlideMenu();
+            } else {
+                this.view().showStartSlideMenu();
+            }
+        });
     }
 
 }
