@@ -19,6 +19,7 @@
 package com.swardana.nayanika.gui.topbar.menu;
 
 import com.swardana.nayanika.base.PaginationStatusControl;
+import com.swardana.nayanika.base.Slide;
 import com.swardana.nayanika.gui.event.ExhibitionEvent;
 import com.swardana.nayanika.gui.event.PaginationEvent;
 import javafx.application.Platform;
@@ -44,6 +45,8 @@ import java.io.File;
  */
 public class MenuBarVisual extends MenuBar implements MenuView {
 
+    private static final int SLIDE_MENU_INDEX = 0;
+
     private final Stage owner;
 
     // File Menu
@@ -59,17 +62,31 @@ public class MenuBarVisual extends MenuBar implements MenuView {
     private final MenuItem goBeginning = new MenuItem();
     private final MenuItem goLast = new MenuItem();
 
+    // View Menu
+    private final Menu viewMenu = new Menu();
+    private final MenuItem startShow = new MenuItem();
+    private final MenuItem stopShow = new MenuItem();
+
     private final PaginationStatusControl pagination;
+
+    private final MenuBehavior behavior;
 
     /**
      * Creates new MenuBarVisual.
      *
      * @param stage the primary stage owner.
      * @param control the pagination observable status control.
+     * @param slide the slide-show observable state control.
      */
-    public MenuBarVisual(final Stage stage, final PaginationStatusControl control) {
+    public MenuBarVisual(
+        final Stage stage,
+        final PaginationStatusControl control,
+        final Slide slide
+    ) {
         this.owner = stage;
         this.pagination = control;
+
+        this.behavior = new MenuBehavior(this, slide);
 
         this.initGraphics();
         this.registerListeners();
@@ -80,16 +97,36 @@ public class MenuBarVisual extends MenuBar implements MenuView {
         return this;
     }
 
+    @Override
+    public final void enableSlideMenu() {
+        this.startShow.setDisable(false);
+    }
+
+    @Override
+    public final void showStartSlideMenu() {
+        this.viewMenu.getItems().remove(SLIDE_MENU_INDEX);
+        this.viewMenu.getItems().add(SLIDE_MENU_INDEX, this.startShow);
+    }
+
+    @Override
+    public final void showStopSlideMenu() {
+        this.viewMenu.getItems().remove(SLIDE_MENU_INDEX);
+        this.viewMenu.getItems().add(SLIDE_MENU_INDEX, this.stopShow);
+    }
+
     private void initGraphics() {
         this.fileMenu.setText("_File");
         this.navigateMenu.setText("_Navigate");
+        this.viewMenu.setText("_View");
 
         this.initFileMenuGraphics();
         this.initNavigateMenuGraphics();
+        this.initViewMenuGraphics();
 
         this.getMenus().setAll(
             this.fileMenu,
-            this.navigateMenu
+            this.navigateMenu,
+            this.viewMenu
         );
     }
 
@@ -120,9 +157,18 @@ public class MenuBarVisual extends MenuBar implements MenuView {
         );
     }
 
+    private void initViewMenuGraphics() {
+        this.startShow.setText("Start slide-show");
+        this.startShow.setDisable(true);
+        this.stopShow.setText("Stop slide-show");
+
+        this.viewMenu.getItems().setAll(this.startShow);
+    }
+
     private void registerListeners() {
         this.registerFileMenuListeners();
         this.registerNavigateMenuListeners();
+        this.registerViewListeners();
     }
 
     private void registerFileMenuListeners() {
@@ -171,4 +217,10 @@ public class MenuBarVisual extends MenuBar implements MenuView {
             )
         );
     }
+
+    private void registerViewListeners() {
+        this.startShow.setOnAction(e -> this.behavior.onStartSlideShow());
+        this.stopShow.setOnAction(e -> this.behavior.onStopSlideShow());
+    }
+
 }

@@ -586,6 +586,7 @@
                                                 <exclude>com.swardana.nayanika.base.FallbackExceptionHandler</exclude>
                                                 <exclude>com.swardana.nayanika.base.NayanikaExecutorService</exclude>
                                                 <exclude>com.swardana.nayanika.base.PictureImage</exclude>
+                                                <exclude>com.swardana.nayanika.base.Slide.Control</exclude>
                                                 <exclude>com.swardana.nayanika.gui.**Visual**</exclude>
                                                 <exclude>com.swardana.nayanika.gui.**View**</exclude>
                                                 <exclude>com.swardana.nayanika.gui.frame.FramePane*</exclude>
