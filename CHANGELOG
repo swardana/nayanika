@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Slide Show animation for displayed pictures.
+
 ### Fixed
 
 - Fix performance on loading pictures ~200 or above with each picture size is ~1-2MB.
