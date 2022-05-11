@@ -19,6 +19,8 @@
 package com.swardana.nayanika.bg;
 
 import com.swardana.nayanika.base.PictureSource;
+import com.swardana.nayanika.base.SortedPictures;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -39,6 +41,15 @@ class StorageTest {
     public void testFetchPicturesFromSource() throws Exception {
         var mockSource = mock(PictureSource.class);
         var storage = new Storage(mockSource);
+        storage.call();
+        verify(mockSource).pictures();
+    }
+
+    @Test
+    @DisplayName("verify fetch pictures from the source and sort it")
+    public void testFetchPicturesFromSourceAndSort() throws Exception {
+        var mockSource = mock(PictureSource.class);
+        var storage = new Storage(mockSource, SortedPictures.Strategy.ASCENDING);
         storage.call();
         verify(mockSource).pictures();
     }

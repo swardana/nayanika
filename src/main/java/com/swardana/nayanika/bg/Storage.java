@@ -20,6 +20,8 @@ package com.swardana.nayanika.bg;
 
 import com.swardana.nayanika.base.PictureImage;
 import com.swardana.nayanika.base.PictureSource;
+import com.swardana.nayanika.base.SortedPictures;
+
 import javafx.concurrent.Task;
 
 import java.util.List;
@@ -39,20 +41,34 @@ import java.util.stream.Collectors;
  */
 public class Storage extends Task<List<PictureImage>> {
 
-    private final PictureSource source;
+    private final SortedPictures sort;
+
+    /**
+     * Creates new Storage.
+     * <p>
+     *     The default strategy is to not sort the
+     *     pictures.
+     * </p>
+     *
+     * @param src the {@link PictureSource}.
+     */
+    public Storage(final PictureSource src) {
+        this(src, SortedPictures.Strategy.NONE);
+    }
 
     /**
      * Creates new Storage.
      *
      * @param src the {@link PictureSource}.
+     * @param strategy the sorted pictures strategy.
      */
-    public Storage(final PictureSource src) {
-        this.source = src;
+    public Storage(final PictureSource src, final SortedPictures.Strategy strategy) {
+        this.sort = strategy.sorted(src.pictures());
     }
 
     @Override
     protected final List<PictureImage> call() throws Exception {
-        return this.source.pictures().stream()
+        return this.sort.sorted().stream()
             .map(PictureImage::new)
             .collect(Collectors.toList());
     }
