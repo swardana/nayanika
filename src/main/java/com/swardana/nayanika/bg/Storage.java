@@ -41,7 +41,8 @@ import java.util.stream.Collectors;
  */
 public class Storage extends Task<List<PictureImage>> {
 
-    private final SortedPictures sort;
+    private final PictureSource source;
+    private final SortedPictures.Strategy strategy;
 
     /**
      * Creates new Storage.
@@ -63,12 +64,14 @@ public class Storage extends Task<List<PictureImage>> {
      * @param strategy the sorted pictures strategy.
      */
     public Storage(final PictureSource src, final SortedPictures.Strategy strategy) {
-        this.sort = strategy.sorted(src.pictures());
+        this.source = src;
+        this.strategy = strategy;
     }
 
     @Override
     protected final List<PictureImage> call() throws Exception {
-        return this.sort.sorted().stream()
+        return this.strategy.sorted(this.source.pictures())
+            .sorted().stream()
             .map(PictureImage::new)
             .collect(Collectors.toList());
     }
