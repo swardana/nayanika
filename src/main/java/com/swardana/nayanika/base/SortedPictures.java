@@ -40,6 +40,37 @@ public interface SortedPictures {
     List<Picture> sorted();
 
     /**
+     * The default un-sortened pictures.
+     * <p>
+     *     This implementation of {@link SortedPictures} will not
+     *     doing anything with the given pictures.
+     * </p>
+     *
+     * @author Sukma Wardana
+     * @version 1.0.0
+     * @since 1.0.0
+     */
+    class NotSortedPictures implements SortedPictures {
+
+        private final List<Picture> pictures;
+
+        /**
+         * Creates new NotSortedPictures.
+         *
+         * @param pics the un-sortened {@link Picture}s.
+         */
+        public NotSortedPictures(final List<Picture> pics) {
+            this.pictures = pics;
+        }
+
+        @Override
+        public final List<Picture> sorted() {
+            return this.pictures;
+        }
+
+    }
+
+    /**
      * Comparator for {@link Picture}.
      * <p>
      *     A base class for comparing two pictures based on its name.
