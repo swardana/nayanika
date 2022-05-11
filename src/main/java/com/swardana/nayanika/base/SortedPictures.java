@@ -34,6 +34,34 @@ import java.util.stream.Collectors;
 public interface SortedPictures {
 
     /**
+     * A sorting strategy.
+     * <p>
+     *     Choose which sort algorithm to use.
+     * </p>
+     */
+    enum Strategy {
+
+        NONE,
+        ASCENDING,
+        DESCENDING;
+
+        /**
+         * Creates a {@link SortedPictures} based on the strategy.
+         *
+         * @param pics the un-sortened pictures.
+         * @return the sort algorithm for the pictures.
+         */
+        public SortedPictures sorted(final List<Picture> pics) {
+            return switch (this) {
+                case ASCENDING -> new AscSortedPictures(pics);
+                case DESCENDING -> new DescSortedPictures(pics);
+                default -> new NotSortedPictures(pics);
+            };
+        }
+
+    }
+
+    /**
      * The sorted pictures.
      *
      * @return the {@link Picture}s in sorted order.
