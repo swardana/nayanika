@@ -128,6 +128,62 @@ public interface SortedPictures {
     }
 
     /**
+     * Sort the pictures in descending order.
+     *
+     * @author Sukma Wardana
+     * @version 1.0.0
+     * @since 1.0.0
+     */
+    class DescSortedPictures implements SortedPictures {
+
+        private static final Logger LOG = Logger.getLogger(DescSortedPictures.class.getName());
+
+        private final List<Picture> pictures;
+
+        /**
+         * Creates new DescSortedPictures.
+         *
+         * @param pics the un-sortened {@link Picture}s.
+         */
+        public DescSortedPictures(final List<Picture> pics) {
+            this.pictures = pics;
+        }
+
+        @Override
+        public final List<Picture> sorted() {
+            var comparator = new DescComparator();
+            var sorted = this.pictures.stream().sorted(comparator).collect(Collectors.toList());
+            if (LOG.isLoggable(Level.FINER)) {
+                LOG.log(Level.FINER, "Before sort the pictures in descending order:");
+                this.pictures.forEach(
+                    p -> LOG.log(Level.FINER, "The picture. [{0}]", new Object[]{p.name()})
+                );
+                LOG.log(Level.FINER, "After sort the pictures in descending order:");
+                sorted.forEach(
+                    p -> LOG.log(Level.FINER, "The picture. [{0}]", new Object[]{p.name()})
+                );
+            }
+            return sorted;
+        }
+
+        private class DescComparator extends NumberAsNameComparator {
+
+            @Override
+            public int compare(final Picture first, final Picture second) {
+                final int result;
+                if (this.isBothPictureNameAsNumber(first, second)) {
+                    result = this.number(second.name()) - this.number(first.name());
+                } else {
+                    result = second.name().compareTo(first.name());
+                }
+                return result;
+            }
+
+        }
+
+    }
+
+    /**
      * Comparator for {@link Picture}.
      * <p>
      *     A base class for comparing two pictures based on its name.
