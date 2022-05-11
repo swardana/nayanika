@@ -22,6 +22,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * A list of sorted pictures.
@@ -66,6 +67,62 @@ public interface SortedPictures {
         @Override
         public final List<Picture> sorted() {
             return this.pictures;
+        }
+
+    }
+
+    /**
+     * Sort the pictures in ascending order.
+     *
+     * @author Sukma Wardana
+     * @version 1.0.0
+     * @since 1.0.0
+     */
+    class AscSortedPictures implements SortedPictures {
+
+        private static final Logger LOG = Logger.getLogger(AscSortedPictures.class.getName());
+
+        private final List<Picture> pictures;
+
+        /**
+         * Creates new AscSortedPictures.
+         *
+         * @param pics the un-sortened {@link Picture}s.
+         */
+        public AscSortedPictures(final List<Picture> pics) {
+            this.pictures = pics;
+        }
+
+        @Override
+        public final List<Picture> sorted() {
+            var comparator = new AscComparator();
+            var sorted = this.pictures.stream().sorted(comparator).collect(Collectors.toList());
+            if (LOG.isLoggable(Level.FINER)) {
+                LOG.log(Level.FINER, "Before sort the pictures in ascending order:");
+                this.pictures.forEach(
+                    p -> LOG.log(Level.FINER, "The picture. [{0}]", new Object[]{p.name()})
+                );
+                LOG.log(Level.FINER, "After sort the pictures in ascending order:");
+                sorted.forEach(
+                    p -> LOG.log(Level.FINER, "The picture. [{0}]", new Object[]{p.name()})
+                );
+            }
+            return sorted;
+        }
+
+        private class AscComparator extends NumberAsNameComparator {
+
+            @Override
+            public int compare(final Picture first, final Picture second) {
+                final int result;
+                if (this.isBothPictureNameAsNumber(first, second)) {
+                    result = this.number(first.name()) - this.number(second.name());
+                } else {
+                    result = first.name().compareTo(second.name());
+                }
+                return result;
+            }
+
         }
 
     }
