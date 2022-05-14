@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Slide Show animation for displayed pictures.
+- Sorting the pictures during load from the local machine directory.
 
 ### Fixed
 
