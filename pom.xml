@@ -608,6 +608,95 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>windows-active</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <icon.path>${project.basedir}\pkg\icon\icon.ico</icon.path>
+                <license.file>${project.basedir}\COPYING</license.file>
+                <executable>cmd</executable>
+                <argument.1>/C</argument.1>
+                <argument.2>${project.basedir}\pkg\build_windows.bat</argument.2>
+                <!--
+                    Replace this UUID with a custom one for your project. This ID is used by the Windows installer system
+                    to know that an installer is intended to replace/upgrade an earlier version. The easiest thing to do is
+                    grab a unique UUID via https://www.uuidgenerator.net
+                -->
+                <windows.upgrade.uuid>c81b8104-e0ae-11ec-9d64-0242ac120002</windows.upgrade.uuid>
+            </properties>
+        </profile>
+        <profile>
+            <id>mac-active</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+            <properties>
+                <icon.path>${project.basedir}/pkg/icon/icon.icns</icon.path>
+                <license.file>${project.basedir}/COPYING</license.file>
+                <executable>/bin/bash</executable>
+                <argument.1/>
+                <argument.2>${project.basedir}/pkg/build_macos.sh</argument.2>
+            </properties>
+        </profile>
+        <profile>
+            <id>unix-active</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <name>Linux</name>
+                </os>
+            </activation>
+            <properties>
+                <icon.path>${project.basedir}/pkg/icon/icon.png</icon.path>
+                <license.file>${project.basedir}/COPYING</license.file>
+                <executable>/bin/bash</executable>
+                <argument.1/>
+                <argument.2>${project.basedir}/pkg/build_linux.sh</argument.2>
+            </properties>
+        </profile>
+        <profile>
+            <id>installer</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>${maven.exec.version}</version>
+                        <executions>
+                            <execution>
+                                <id>build-package</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <workingDirectory>${project.basedir}</workingDirectory>
+                            <executable>${executable}</executable>
+                            <arguments>
+                                <argument>${argument.1}</argument>
+                                <argument>${argument.2}</argument>
+                            </arguments>
+                            <environmentVariables>
+                                <UUID>${windows.upgrade.uuid}</UUID>
+                                <MAIN_MODULE>${app.module}</MAIN_MODULE>
+                                <MAIN_CLASS>${app.launcher}</MAIN_CLASS>
+                                <MAIN_JAR>${project.artifactId}-${project.version}.jar</MAIN_JAR>
+                                <ICON_PATH>${icon.path}</ICON_PATH>
+                                <LICENSE_FILE>${license.file}</LICENSE_FILE>
+                            </environmentVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
 </project>
